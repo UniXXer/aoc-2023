@@ -1,4 +1,4 @@
-package main
+package day01
 
 import (
 	"fmt"
@@ -8,6 +8,6 @@ import (
 
 func main() {
 	// Get a greeting message and print it.
-	message := util.Hello("UniXXer")
+	message := io.Hello("UniXXer")
 	fmt.Println(message)
 }
