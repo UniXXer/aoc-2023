@@ -2,6 +2,7 @@ package main
 
 import (
 	_ "aoc2023/day00"
+	_ "aoc2023/day01"
 	"errors"
 	"os"
 	"unixxer-aoc-2023/commons"
