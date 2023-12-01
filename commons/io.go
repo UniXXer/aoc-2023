@@ -33,12 +33,12 @@ func readFileIntoArray(filename string) ([]string, error) {
 	return inputs, nil
 }
 
-func ReadExample(day string) ([]string, error) {
-	var filename string = fmt.Sprintf("day%s/inputs/example.txt", day)
+func ReadExample(day string, stage int) ([]string, error) {
+	var filename string = fmt.Sprintf("day%s/inputs/example%d.txt", day, stage)
 	return readFileIntoArray(filename)
 }
 
-func ReadInput(day string) ([]string, error) {
-	var filename string = fmt.Sprintf("day%s/inputs/input.txt", day)
+func ReadInput(day string, stage int) ([]string, error) {
+	var filename string = fmt.Sprintf("day%s/inputs/input%d.txt", day, stage)
 	return readFileIntoArray(filename)
 }

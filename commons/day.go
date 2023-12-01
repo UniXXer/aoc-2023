@@ -15,7 +15,7 @@ func NewDay(d string, solveFirst, solveSecond func([]string) error) *DayType {
 	day.number = d
 
 	day.SolveFirst = func(exampleMode bool) error {
-		inputs, err := readInputs(exampleMode, day.number)
+		inputs, err := readInputs(exampleMode, day.number, 1)
 
 		if err != nil {
 			return err
@@ -25,7 +25,7 @@ func NewDay(d string, solveFirst, solveSecond func([]string) error) *DayType {
 	}
 
 	day.SolveSecond = func(exampleMode bool) error {
-		inputs, err := readInputs(exampleMode, day.number)
+		inputs, err := readInputs(exampleMode, day.number, 2)
 
 		if err != nil {
 			return err
@@ -39,10 +39,10 @@ func NewDay(d string, solveFirst, solveSecond func([]string) error) *DayType {
 	return &day
 }
 
-func readInputs(exampleMode bool, day string) ([]string, error) {
+func readInputs(exampleMode bool, day string, stage int) ([]string, error) {
 	if exampleMode {
-		return ReadExample(day)
+		return ReadExample(day, stage)
 	} else {
-		return ReadInput(day)
+		return ReadInput(day, stage)
 	}
 }
