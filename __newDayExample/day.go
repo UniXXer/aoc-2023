@@ -6,7 +6,7 @@ import (
 
 func solveFirst(inputs []string) error {
 
-	fmt.Printf("solveSecond is not implemented yet!")
+	fmt.Printf("solveFirst is not implemented yet!")
 	fmt.Println()
 
 	return nil
