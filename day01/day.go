@@ -26,6 +26,18 @@ var allDigits = []digit{
 	{name: "nine", value: "9"},
 }
 
+var allDigitsExtended = []digit{
+	{name: "one", value: "one1one"},
+	{name: "two", value: "two2two"},
+	{name: "three", value: "three3three"},
+	{name: "four", value: "four4four"},
+	{name: "five", value: "five5five"},
+	{name: "six", value: "six6six"},
+	{name: "seven", value: "seven7seven"},
+	{name: "eight", value: "eight8eight"},
+	{name: "nine", value: "nine9nine"},
+}
+
 func solveFirst(inputs []string) error {
 
 	resultCounter, err := calculateCalibration(inputs)
@@ -55,10 +67,15 @@ func solveSecond(inputs []string) error {
 }
 
 func normalizeInputs(inputs []string) {
-	var d digit
+	//var d digit
 	for i := 0; i < len(inputs); i++ {
 		iterStr := inputs[i]
 
+		for _, d := range allDigitsExtended {
+			iterStr = strings.Replace(iterStr, d.name, d.value, -1)
+		}
+
+		/*
 		d = findNext(iterStr)
 
 		if d.value == "" {
@@ -73,7 +90,7 @@ func normalizeInputs(inputs []string) {
 		}
 
 		//commons.PrintDebug(inputs[i] + " => " + iterStr)
-
+		*/
 		inputs[i] = iterStr
 	}
 }
