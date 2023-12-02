@@ -4,6 +4,7 @@ import (
 	_ "aoc2023/day00"
 	_ "aoc2023/day01"
 	_ "aoc2023/day02"
+	_ "aoc2023/day03"
 	"errors"
 	"os"
 	"unixxer-aoc-2023/commons"
