@@ -17,7 +17,7 @@ func solveFirst(inputs []string) error {
 	result := 0
 
 	for i, line := range inputs {
-		normalLine := line[strings.Index(line, ": ")+2 : len(line)]
+		normalLine := line[strings.Index(line, ": ")+2:]
 
 		gamePossible, err := isGamePossible(strings.TrimSpace(normalLine), max)
 
@@ -41,7 +41,7 @@ func solveSecond(inputs []string) error {
 	result := 0
 
 	for _, line := range inputs {
-		normalLine := line[strings.Index(line, ": ")+2 : len(line)]
+		normalLine := line[strings.Index(line, ": ")+2:]
 
 		power, err := powerOfGame(strings.TrimSpace(normalLine))
 
