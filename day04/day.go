@@ -42,8 +42,55 @@ func solveFirst(inputs []string) error {
 
 func solveSecond(inputs []string) error {
 
-	fmt.Printf("solveSecond is not implemented yet!")
-	fmt.Println()
+	cardPoints := make(map[int]int)
+
+	allCards := []int{}
+
+	for j, line := range inputs {
+		allCards = append(allCards, j+1)
+		winningNumbers, myNumbers := parseLine(line)
+
+		allWinningNumbers := "-" + strings.Join(winningNumbers, "-") + "-"
+
+		for i := range myNumbers {
+			searchStr := "-" + myNumbers[i] + "-"
+			idx := strings.Index(allWinningNumbers, searchStr)
+
+			if idx > -1 {
+				cardPoints[j+1]++
+			}
+		}
+	}
+
+	pos := 0
+
+	for pos < len(allCards) {
+		currPoints := cardPoints[allCards[pos]]
+
+		var cardsToAdd []int
+
+		for k := 1; k <= currPoints; k++ {
+			cardsToAdd = append(cardsToAdd, allCards[pos+k])
+		}
+
+		commons.PrintDebug(fmt.Sprintf("The card %d at %d has %d points. Therefore adding %s", []any{allCards[pos], pos, currPoints, cardsToAdd}...))
+
+		for l := 0; l < len(cardsToAdd); l++ {
+			addCard := cardsToAdd[l]
+			allCards = insertIntoArray(allCards, addCard, pos+l)
+		}
+
+		fmt.Println(allCards)
+
+		pos++
+
+		if pos == 30 {
+			break
+		}
+	}
+
+	fmt.Println(allCards)
+	fmt.Println(cardPoints)
 
 	return nil
 
@@ -59,4 +106,11 @@ func parseLine(line string) ([]string, []string) {
 	myNumbers := r.FindAllString(myNumbersStr, -1)
 
 	return winningNumbers, myNumbers
+}
+
+func insertIntoArray(array []int, value int, idx int) []int {
+	array = append(array, 0)
+	copy(array[idx+1:], array[idx:])
+	array[idx] = value
+	return array
 }
