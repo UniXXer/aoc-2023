@@ -47,7 +47,7 @@ func solveSecond(inputs []string) error {
 	allCards := []int{}
 
 	for j, line := range inputs {
-		allCards = append(allCards, j+1)
+		allCards = append(allCards, 1)
 		winningNumbers, myNumbers := parseLine(line)
 
 		allWinningNumbers := "-" + strings.Join(winningNumbers, "-") + "-"
@@ -57,40 +57,34 @@ func solveSecond(inputs []string) error {
 			idx := strings.Index(allWinningNumbers, searchStr)
 
 			if idx > -1 {
-				cardPoints[j+1]++
+				cardPoints[j]++
 			}
 		}
 	}
 
-	pos := 0
+	for i := 0; i < len(allCards); i++ {
+		currPoints := cardPoints[i]
 
-	for pos < len(allCards) {
-		currPoints := cardPoints[allCards[pos]]
+		fmt.Println("allCards: ", allCards)
 
-		var cardsToAdd []int
+		commons.PrintDebugFormat("Card %d has %d points.", i, currPoints)
 
-		for k := 1; k <= currPoints; k++ {
-			cardsToAdd = append(cardsToAdd, allCards[pos+k])
+		for j := i+1; j <= i+currPoints; j++ {
+			if(j >= len(allCards)) {
+				continue
+			}
+
+			allCards[j] += allCards[i]
 		}
+	} 
 
-		commons.PrintDebug(fmt.Sprintf("The card %d at %d has %d points. Therefore adding %s", []any{allCards[pos], pos, currPoints, cardsToAdd}...))
+	cardCounter := 0
 
-		for l := 0; l < len(cardsToAdd); l++ {
-			addCard := cardsToAdd[l]
-			allCards = insertIntoArray(allCards, addCard, pos+l)
-		}
-
-		fmt.Println(allCards)
-
-		pos++
-
-		if pos == 30 {
-			break
-		}
+	for i := 0; i < len(allCards); i++ {
+		cardCounter += allCards[i]
 	}
 
-	fmt.Println(allCards)
-	fmt.Println(cardPoints)
+	commons.PrintInfoFormat("Count of all card is %d", cardCounter)
 
 	return nil
 
