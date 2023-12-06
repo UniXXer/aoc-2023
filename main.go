@@ -7,6 +7,7 @@ import (
 	_ "aoc2023/day03"
 	_ "aoc2023/day04"
 	_ "aoc2023/day05"
+	_ "aoc2023/day06"
 	
 	"errors"
 	"os"
