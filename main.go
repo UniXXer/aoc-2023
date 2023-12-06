@@ -8,7 +8,8 @@ import (
 	_ "aoc2023/day04"
 	_ "aoc2023/day05"
 	_ "aoc2023/day06"
-	
+	_ "aoc2023/day07"
+
 	"errors"
 	"os"
 	"unixxer-aoc-2023/commons"
