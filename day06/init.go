@@ -5,5 +5,5 @@ import (
 )
 
 func init() {
-	commons.NewDay("00", solveFirst, solveSecond)
+	commons.NewDay("06", solveFirst, solveSecond)
 }
