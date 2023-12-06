@@ -12,6 +12,31 @@ func solveFirst(inputs []string) error {
 	times := parseLine(inputs[0])
 	dists := parseLine(inputs[1])
 
+	winMargin := calculateWinMargin(times, dists)
+
+	commons.PrintInfoFormat("Total win margin is %d", winMargin)
+
+	return nil
+
+}
+
+func solveSecond(inputs []string) error {
+
+	times := parseLine(inputs[0])
+	dists := parseLine(inputs[1])
+
+	time, _ := strconv.Atoi(strings.Trim(strings.Replace(fmt.Sprint(times), " ", "", -1), "[]"))
+	dist, _ := strconv.Atoi(strings.Trim(strings.Replace(fmt.Sprint(dists), " ", "", -1), "[]"))
+
+	winMargin := calculateWinMargin([]int{time}, []int{dist})
+
+	commons.PrintInfoFormat("Total win margin is %d", winMargin)
+
+	return nil
+
+}
+
+func calculateWinMargin(times, dists []int) int {
 	winMargin := 1
 
 	for race := 0; race < len(times); race++ {
@@ -27,19 +52,7 @@ func solveFirst(inputs []string) error {
 		winMargin = winMargin * wins
 	}
 
-	commons.PrintInfoFormat("Total win margin is %d", winMargin)
-
-	return nil
-
-}
-
-func solveSecond(inputs []string) error {
-
-	fmt.Printf("solveSecond is not implemented yet!")
-	fmt.Println()
-
-	return nil
-
+	return winMargin
 }
 
 func parseLine(line string) []int {
