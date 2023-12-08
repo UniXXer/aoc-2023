@@ -84,93 +84,82 @@ func determineHandType(chars map[string]int) string {
 	sort.Sort(sort.Reverse(sort.IntSlice(values)))
 
 	if !withJokers {
-		return typeOfHand(values)
+		return typeOfHand(values, 0)
 	} else {
-		jokersLeft := jokers
-
-		if jokers >= 4 {
-			return "A"
-		}
-		
-		for i := jokersLeft; i > 0; i-- {
-			for j := len(values); j > 0; j-- {
-				if values[j-1] < 5 {
-					values[j-1]++
-				}
-			}
-		}
-	
-
-		/*
-		if jokers == 3 {
-			if values[0] == 2 {
-				return "A"
-			}
-			
-			return "B"
-		}
-
-		if jokers == 2 {
-			if values[0] == 3 {
-				return "A"
-			}
-
-			if values[0] == 2 {
-				return "B"
-			}
-		}
-
-		if jokers == 1 {
-			if values[0] == 4 {
-				return "A"
-			}
-
-			if values[0] == 3 {
-				return "B"
-			}
-
-			if values[0] == 2 && values[1] == 2 {
-				return "C"
-			}
-
-			if values[0] == 2 {
-				return "D"
-			}
-
-			if values[0] == 1 {
-				return "F"
-			}
-		}*/
-
-		return typeOfHand(values)
+		return typeOfHand(values, jokers)
 	}
 }
 
-func typeOfHand(values []int) string {
+func typeOfHand(values []int, jokers int) string {
+	if jokers >= 4 {
+		return "A"
+	}
+
 	switch values[0] {
 	case 5:
 		return "A" //Five of a kind
 	case 4:
+		if jokers > 0 {
+			return "A"
+		}
 		return "B" //Four of a kind
 	case 3:
 		{
+			if jokers == 2 {
+				return "A"
+			}
+
+			if jokers == 1 {
+				return "B"
+			}
+
 			switch values[1] {
 			case 2:
+				// No joker possible
 				return "C" // Full house
 			default:
+				if jokers == 1 {
+					return "B"
+				}
 				return "D" // Three of a kind
 			}
 		}
 	case 2:
 		{
+			if jokers == 3 {
+				return "A"
+			}
+
+			if jokers == 2 {
+				return "B"
+			}
+
 			switch values[1] {
 			case 2:
+				if jokers == 1 {
+					return "C"
+				}
 				return "E" // Two pair
 			default:
+				if jokers == 1 {
+					return "D"
+				}
 				return "F" // One pair
 			}
 		}
 	default:
+		if jokers == 3 {
+			return "B"
+		}
+
+		if jokers == 2 {
+			return "D"
+		}
+
+		if jokers == 1 {
+			return "F"
+		}
+
 		return "G" // High card
 	}
 }
