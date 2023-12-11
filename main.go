@@ -10,6 +10,7 @@ import (
 	_ "aoc2023/day06"
 	_ "aoc2023/day07"
 	_ "aoc2023/day08"
+	_ "aoc2023/day09"
 
 	"errors"
 	"os"
